@@ -7,16 +7,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MSSSStaffDic
 {
     public partial class GeneralForm : Form
     {
-        public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();   
-        
+        public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();
+
+        private void LoadStaff()
+        {
+            try
+            {
+                
+                string filePath = "MalinStaffNamesV3.csv";
+                MasterFile.Clear();
+
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] data = line.Split(',');
+                        if (int.TryParse(data[0], out int id))
+                        {
+                            string Name = data[1];
+                            if (!MasterFile.ContainsKey(id))
+                            {
+                                MasterFile.Add(id, Name);
+                            }
+                        }
+
+                    }
+                }
+
+                MessageBox.Show("Staff data loaded successfully.");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                
+            }
+        }
+
         public GeneralForm()
         {
             InitializeComponent();
+            LoadStaff();
         }
     }
 }
