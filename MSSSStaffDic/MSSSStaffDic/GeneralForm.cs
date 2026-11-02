@@ -10,9 +10,11 @@ using System.Windows.Forms;
 
 namespace MSSSStaffDic
 {
-    public partial class Form1 : Form
+    public partial class GeneralForm : Form
     {
-        public Form1()
+        public static Dictionary<int, string> MasterFile = new Dictionary<int, string>();   
+        
+        public GeneralForm()
         {
             InitializeComponent();
         }
