@@ -263,6 +263,7 @@
             this.Controls.Add(this.label1);
             this.Name = "GeneralForm";
             this.Text = "GeneralForm";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GeneralForm_KeyDown);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);

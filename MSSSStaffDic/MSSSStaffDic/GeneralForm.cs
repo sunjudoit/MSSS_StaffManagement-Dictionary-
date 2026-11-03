@@ -86,6 +86,7 @@ namespace MSSSStaffDic
                     lstSearchResults.Items.Add($"{staff.Key} : {staff.Value}");
                 }
             }
+            this.Text = "Search results: " + lstSearchResults.Items.Count;
         }
       
 
@@ -108,6 +109,7 @@ namespace MSSSStaffDic
 
         private void txtSearchID_TextChanged(object sender, EventArgs e)
         {
+           
             SearchStaffByID();
         }
 
@@ -117,6 +119,21 @@ namespace MSSSStaffDic
             SearchStaffByName();
         }
 
-      
+        private void GeneralForm_KeyDown(object sender, KeyEventArgs e)
+        {
+           /*
+            if (e.KeyCode == Keys.F1)
+            {
+                txtSearchID.Clear();
+                txtSearchID.Focus();
+
+            }
+            else if (e.KeyCode == Keys.F2)
+            {
+                txtSearchName.Clear();
+                txtSearchName.Focus();
+            }
+           */
+        }
     }
 }
