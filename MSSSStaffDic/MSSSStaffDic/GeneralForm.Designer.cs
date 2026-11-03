@@ -70,6 +70,7 @@
             this.lstAllStaff.Name = "lstAllStaff";
             this.lstAllStaff.Size = new System.Drawing.Size(176, 381);
             this.lstAllStaff.TabIndex = 1;
+            this.lstAllStaff.TabStop = false;
             // 
             // label2
             // 
@@ -107,7 +108,7 @@
             this.lstSearchResults.Location = new System.Drawing.Point(15, 40);
             this.lstSearchResults.Name = "lstSearchResults";
             this.lstSearchResults.Size = new System.Drawing.Size(183, 238);
-            this.lstSearchResults.TabIndex = 10;
+            this.lstSearchResults.TabIndex = 3;
             this.lstSearchResults.SelectedIndexChanged += new System.EventHandler(this.lstSearchResults_SelectedIndexChanged);
             // 
             // label8
@@ -136,6 +137,7 @@
             this.txtInfoName.Name = "txtInfoName";
             this.txtInfoName.Size = new System.Drawing.Size(151, 20);
             this.txtInfoName.TabIndex = 12;
+            this.txtInfoName.TabStop = false;
             // 
             // txtInfoID
             // 
@@ -143,6 +145,7 @@
             this.txtInfoID.Name = "txtInfoID";
             this.txtInfoID.Size = new System.Drawing.Size(151, 20);
             this.txtInfoID.TabIndex = 11;
+            this.txtInfoID.TabStop = false;
             // 
             // panel2
             // 
@@ -206,7 +209,7 @@
             this.txtSearchID.Location = new System.Drawing.Point(54, 43);
             this.txtSearchID.Name = "txtSearchID";
             this.txtSearchID.Size = new System.Drawing.Size(125, 20);
-            this.txtSearchID.TabIndex = 6;
+            this.txtSearchID.TabIndex = 0;
             this.txtSearchID.TextChanged += new System.EventHandler(this.txtSearchID_TextChanged);
             this.txtSearchID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearchID_KeyPress);
             // 
@@ -215,7 +218,7 @@
             this.txtSearchName.Location = new System.Drawing.Point(235, 47);
             this.txtSearchName.Name = "txtSearchName";
             this.txtSearchName.Size = new System.Drawing.Size(125, 20);
-            this.txtSearchName.TabIndex = 7;
+            this.txtSearchName.TabIndex = 1;
             this.txtSearchName.TextChanged += new System.EventHandler(this.txtSearchName_TextChanged);
             // 
             // label6
