@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MSSSStaffDic
 {
@@ -16,6 +17,8 @@ namespace MSSSStaffDic
         {
             InitializeComponent();
 
+            txtAdminID.MaxLength = 9;
+
             txtAdminID.Text = staffID;
             txtAdminName.Text = staffName;
 
@@ -24,17 +27,42 @@ namespace MSSSStaffDic
 
         }
 
-        private void CreatStaffInput()
+        private void CreatStaff()
         {
             txtAdminID.ReadOnly = false;
             txtAdminName.ReadOnly = false;
 
             txtAdminID.Text = "77";
+            txtAdminName.Clear();
+
             txtAdminID.Focus();
             txtAdminID.SelectionStart = txtAdminID.Text.Length;
 
+            //validate staff ID
+            if (!int.TryParse(txtAdminID.Text, out int staffID) || txtAdminID.Text.Length != 9 ||
+                !txtAdminID.Text.StartsWith("77"))
+            {
+                MessageBox.Show("Staff ID must start with 77 and be 9 digits.");
+                return;
+            }
+           
+
 
         }
+        private void UpdateStaff()
+        {
+            txtAdminName.ReadOnly = false;
+            txtAdminName.Focus();
+
+        }
+        private void DeleteStaff()
+        {
+            
+            txtAdminID.Focus();
+            txtAdminID.SelectionStart = txtAdminID.Text.Length;
+        }
+       
+
 
         private void AdminForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -44,9 +72,17 @@ namespace MSSSStaffDic
             }
             else if (e.Alt && e.KeyCode == Keys.C)
             {
-                CreatStaffInput();
+                CreatStaff();
             }
-            
+            else if (e.Alt && e.KeyCode == Keys.U)
+            {
+                UpdateStaff();
+            }
+            else if (e.Alt && e.KeyCode == Keys.D)
+            {
+                DeleteStaff();
+            }
+
         }
 
         private void txtAdminID_KeyPress(object sender, KeyPressEventArgs e)
@@ -56,14 +92,13 @@ namespace MSSSStaffDic
                 return;
             }
 
-            txtAdminID.MaxLength = 9;
-
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
                 MessageBox.Show("Please enter numbers only.");
                 return;
             }
+            
 
         }
     }
