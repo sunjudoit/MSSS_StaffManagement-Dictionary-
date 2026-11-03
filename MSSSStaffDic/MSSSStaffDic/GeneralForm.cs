@@ -86,6 +86,8 @@ namespace MSSSStaffDic
         private void SearchStaff()
         {
             lstSearchResults.Items.Clear();
+            txtInfoID.Clear();
+            txtInfoName.Clear();
 
             string searchID = txtSearchID.Text.Trim();
             string searchName = txtSearchName.Text.Replace(" ", "").ToLower();
@@ -133,7 +135,8 @@ namespace MSSSStaffDic
             }
             else if (e.Alt && e.KeyCode == Keys.A)
             {
-                AdminForm admin = new AdminForm();
+                
+                AdminForm admin = new AdminForm(txtInfoID.Text,txtInfoName.Text);
                 admin.ShowDialog(this);
 
             }

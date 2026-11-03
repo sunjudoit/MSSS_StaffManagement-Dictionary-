@@ -75,6 +75,7 @@
             this.txtAdminID.Name = "txtAdminID";
             this.txtAdminID.Size = new System.Drawing.Size(329, 20);
             this.txtAdminID.TabIndex = 0;
+            this.txtAdminID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAdminID_KeyPress);
             // 
             // panel3
             // 
