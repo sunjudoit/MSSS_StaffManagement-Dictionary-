@@ -70,25 +70,7 @@ namespace MSSSStaffDic
             DisplayStaff();
 
         }
-
-        private void SearchStaffByID()
-        {
-            lstSearchResults.Items.Clear();
-
-            string searchID = txtSearchID.Text.Trim();
-            if (searchID == "") return;
-
-            foreach (KeyValuePair<int, string> staff in MasterFile)
-            {
-                string staffID = staff.Key.ToString();
-
-                if (staffID.Contains(searchID))
-                {
-                    lstSearchResults.Items.Add($"{staff.Key} : {staff.Value}");
-                }
-            }
-           
-        }
+    
         private void txtSearchID_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
@@ -101,34 +83,37 @@ namespace MSSSStaffDic
         }
 
 
-        private void SearchStaffByName()
+        private void SearchStaff()
         {
             lstSearchResults.Items.Clear();
 
+            string searchID = txtSearchID.Text.Trim();
             string searchName = txtSearchName.Text.Replace(" ", "").ToLower();
-            if (searchName == "") return;
+
+            if (searchID == "" && searchName == "") return;
 
             foreach (KeyValuePair<int, string> staff in MasterFile)
-            {
+            { 
+                string staffID = staff.Key.ToString();
                 string staffName = staff.Value.ToLower().Replace(" ", "");
-
-                if (staffName.Contains(searchName))
+                if (staffID.Contains(searchID) && staffName.Contains(searchName))
                 {
                     lstSearchResults.Items.Add($"{staff.Key} : {staff.Value}");
                 }
             }
+
         }
 
         private void txtSearchID_TextChanged(object sender, EventArgs e)
         {
            
-            SearchStaffByID();
+            SearchStaff();
         }
 
 
         private void txtSearchName_TextChanged(object sender, EventArgs e)
         {
-            SearchStaffByName();
+            SearchStaff();
         }
 
         private void GeneralForm_KeyDown(object sender, KeyEventArgs e)
@@ -149,6 +134,20 @@ namespace MSSSStaffDic
            
         }
 
-        
+        private void lstSearchResults_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstSearchResults.SelectedItem == null)
+            {
+                return;
+            }
+
+            string selectedStaff = lstSearchResults.SelectedItem.ToString();
+            string[] data = selectedStaff.Split(':');
+            
+            txtInfoID.Text = data[0].Trim();
+            txtInfoName.Text = data[1].Trim();
+
+
+        }
     }
 }

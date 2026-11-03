@@ -108,12 +108,13 @@
             this.lstSearchResults.Name = "lstSearchResults";
             this.lstSearchResults.Size = new System.Drawing.Size(183, 238);
             this.lstSearchResults.TabIndex = 10;
+            this.lstSearchResults.SelectedIndexChanged += new System.EventHandler(this.lstSearchResults_SelectedIndexChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Candara", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(213, 83);
+            this.label8.Location = new System.Drawing.Point(207, 83);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(39, 14);
             this.label8.TabIndex = 14;
