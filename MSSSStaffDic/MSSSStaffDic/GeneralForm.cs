@@ -76,6 +76,7 @@ namespace MSSSStaffDic
             lstSearchResults.Items.Clear();
 
             string searchID = txtSearchID.Text.Trim();
+            if (searchID == "") return;
 
             foreach (KeyValuePair<int, string> staff in MasterFile)
             {
@@ -86,15 +87,26 @@ namespace MSSSStaffDic
                     lstSearchResults.Items.Add($"{staff.Key} : {staff.Value}");
                 }
             }
-            this.Text = "Search results: " + lstSearchResults.Items.Count;
+           
         }
-      
+        private void txtSearchID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+             
+                MessageBox.Show("Please enter numbers only.");
+                return;
+            }
+        }
+
 
         private void SearchStaffByName()
         {
             lstSearchResults.Items.Clear();
 
             string searchName = txtSearchName.Text.Replace(" ", "").ToLower();
+            if (searchName == "") return;
 
             foreach (KeyValuePair<int, string> staff in MasterFile)
             {
@@ -121,11 +133,12 @@ namespace MSSSStaffDic
 
         private void GeneralForm_KeyDown(object sender, KeyEventArgs e)
         {
-           /*
+           
             if (e.KeyCode == Keys.F1)
             {
                 txtSearchID.Clear();
                 txtSearchID.Focus();
+                
 
             }
             else if (e.KeyCode == Keys.F2)
@@ -133,7 +146,9 @@ namespace MSSSStaffDic
                 txtSearchName.Clear();
                 txtSearchName.Focus();
             }
-           */
+           
         }
+
+        
     }
 }
