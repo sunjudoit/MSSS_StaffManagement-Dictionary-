@@ -131,7 +131,14 @@ namespace MSSSStaffDic
                 txtSearchName.Clear();
                 txtSearchName.Focus();
             }
-           
+            else if (e.Alt && e.KeyCode == Keys.A)
+            {
+                AdminForm admin = new AdminForm();
+                admin.ShowDialog(this);
+
+            }
+
+
         }
 
         private void lstSearchResults_SelectedIndexChanged(object sender, EventArgs e)

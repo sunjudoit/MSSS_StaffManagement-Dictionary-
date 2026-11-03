@@ -16,5 +16,13 @@ namespace MSSSStaffDic
         {
             InitializeComponent();
         }
+
+        private void AdminForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt && e.KeyCode == Keys.L)
+            {
+                this.Close();
+            }
+        }
     }
 }

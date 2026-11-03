@@ -48,6 +48,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.statusStripGeneral = new System.Windows.Forms.StatusStrip();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -149,7 +150,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Info;
+            this.panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Controls.Add(this.label9);
@@ -243,7 +244,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Info;
+            this.panel3.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.txtSearchName);
@@ -254,11 +255,20 @@
             this.panel3.Size = new System.Drawing.Size(417, 77);
             this.panel3.TabIndex = 17;
             // 
+            // statusStripGeneral
+            // 
+            this.statusStripGeneral.Location = new System.Drawing.Point(0, 475);
+            this.statusStripGeneral.Name = "statusStripGeneral";
+            this.statusStripGeneral.Size = new System.Drawing.Size(669, 22);
+            this.statusStripGeneral.TabIndex = 18;
+            this.statusStripGeneral.Text = "statusStrip1";
+            // 
             // GeneralForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 488);
+            this.ClientSize = new System.Drawing.Size(669, 497);
+            this.Controls.Add(this.statusStripGeneral);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
@@ -301,6 +311,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.StatusStrip statusStripGeneral;
     }
 }
 
