@@ -19,7 +19,7 @@ namespace MSSSStaffDic
         {
             try
             {
-                
+
                 string filePath = "MalinStaffNamesV3.csv";
                 MasterFile.Clear();
 
@@ -42,20 +42,33 @@ namespace MSSSStaffDic
                     }
                 }
 
-                MessageBox.Show("Staff data loaded successfully.");
+                // staus massage Staff data loaded successfully
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                
+
             }
+        }
+
+        private void DisplayStaff()
+        {
+            lstAllStaff.Items.Clear();
+
+            foreach (KeyValuePair<int,string> staff in MasterFile)
+            {
+                lstAllStaff.Items.Add($"{staff.Key} : {staff.Value}");
+            }
+
         }
 
         public GeneralForm()
         {
             InitializeComponent();
             LoadStaff();
-        }
+            DisplayStaff();
+
+        } 
     }
 }
