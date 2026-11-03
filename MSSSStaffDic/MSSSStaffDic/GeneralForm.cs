@@ -56,7 +56,7 @@ namespace MSSSStaffDic
         {
             lstAllStaff.Items.Clear();
 
-            foreach (KeyValuePair<int,string> staff in MasterFile)
+            foreach (KeyValuePair<int, string> staff in MasterFile)
             {
                 lstAllStaff.Items.Add($"{staff.Key} : {staff.Value}");
             }
@@ -69,6 +69,54 @@ namespace MSSSStaffDic
             LoadStaff();
             DisplayStaff();
 
-        } 
+        }
+
+        private void SearchStaffByID()
+        {
+            lstSearchResults.Items.Clear();
+
+            string searchID = txtSearchID.Text.Trim();
+
+            foreach (KeyValuePair<int, string> staff in MasterFile)
+            {
+                string staffID = staff.Key.ToString();
+
+                if (staffID.Contains(searchID))
+                {
+                    lstSearchResults.Items.Add($"{staff.Key} : {staff.Value}");
+                }
+            }
+        }
+      
+
+        private void SearchStaffByName()
+        {
+            lstSearchResults.Items.Clear();
+
+            string searchName = txtSearchName.Text.Replace(" ", "").ToLower();
+
+            foreach (KeyValuePair<int, string> staff in MasterFile)
+            {
+                string staffName = staff.Value.ToLower().Replace(" ", "");
+
+                if (staffName.Contains(searchName))
+                {
+                    lstSearchResults.Items.Add($"{staff.Key} : {staff.Value}");
+                }
+            }
+        }
+
+        private void txtSearchID_TextChanged(object sender, EventArgs e)
+        {
+            SearchStaffByID();
+        }
+
+
+        private void txtSearchName_TextChanged(object sender, EventArgs e)
+        {
+            SearchStaffByName();
+        }
+
+      
     }
 }
