@@ -13,6 +13,10 @@ namespace MSSSStaffDic
 {
     public partial class AdminForm : Form
     {
+        private string currentMode = "";
+        private bool hasSelectedStaff = false;
+        private string originalStaffID = "";
+
         public AdminForm(string staffID, string staffName)
         {
             InitializeComponent();
@@ -25,10 +29,22 @@ namespace MSSSStaffDic
             txtAdminID.ReadOnly = true;
             txtAdminName.ReadOnly = true;
 
+            hasSelectedStaff = int.TryParse(staffID, out int id) &&
+                       GeneralForm.MasterFile.ContainsKey(id);
+
+            originalStaffID = staffID;
         }
 
-        private void CreatStaff()
+        private void CreatInputStaff()
         {
+            if (currentMode != "")
+            {
+                MessageBox.Show("Please complete the current operation first.");
+                return;
+            }
+
+            currentMode = "Create";
+
             txtAdminID.ReadOnly = false;
             txtAdminName.ReadOnly = false;
 
@@ -37,29 +53,83 @@ namespace MSSSStaffDic
 
             txtAdminID.Focus();
             txtAdminID.SelectionStart = txtAdminID.Text.Length;
-
-            //validate staff ID
-            if (!int.TryParse(txtAdminID.Text, out int staffID) || txtAdminID.Text.Length != 9 ||
+           
+        }
+        private bool CreatStaff()
+        {
+            // Validate Staff ID
+            if (!int.TryParse(txtAdminID.Text, out int staffID) ||
+                txtAdminID.Text.Length != 9 ||
                 !txtAdminID.Text.StartsWith("77"))
             {
                 MessageBox.Show("Staff ID must start with 77 and be 9 digits.");
-                return;
+                return false;
             }
-           
 
+            // Validate Staff Name
+            if (string.IsNullOrWhiteSpace(txtAdminName.Text))
+            {
+                MessageBox.Show("Please enter a staff name.");
+                return false;
+            }
+
+            // Check duplicate Staff ID
+            if (GeneralForm.MasterFile.ContainsKey(staffID))
+            {
+                MessageBox.Show("Staff ID already exists.");
+                return false;
+            }
+
+            // Add staff to Dictionary
+            GeneralForm.MasterFile.Add(staffID, txtAdminName.Text.Trim());
+
+            return true;
 
         }
-        private void UpdateStaff()
+        private void UpdateInputStaff()
         {
+            if (currentMode != "")
+            {
+                MessageBox.Show("Please complete the current operation first.");
+                return;
+            }
+
+            currentMode = "Update";
+
             txtAdminName.ReadOnly = false;
             txtAdminName.Focus();
 
         }
-        private void DeleteStaff()
+        private bool UpdateStaff()
         {
-            
-            txtAdminID.Focus();
-            txtAdminID.SelectionStart = txtAdminID.Text.Length;
+            int staffID = int.Parse(txtAdminID.Text);
+
+            // Validate Staff Name
+            if (string.IsNullOrWhiteSpace(txtAdminName.Text))
+            {
+                MessageBox.Show("Please enter a staff name.");
+                return false;
+            }
+
+            // Update staff name in Dictionary
+            GeneralForm.MasterFile[staffID] = txtAdminName.Text.Trim();
+
+            return true;
+        }
+       
+        private void DeleteInputStaff()
+        {
+            if (currentMode != "")
+            {
+                MessageBox.Show("Please complete the current operation first.");
+                return;
+            }
+
+            currentMode = "Delete";
+
+            txtAdminID.Clear();
+            txtAdminName.Clear();
+
         }
        
 
@@ -68,19 +138,44 @@ namespace MSSSStaffDic
         {
             if (e.Alt && e.KeyCode == Keys.L)
             {
+                if (currentMode == "Create")
+                {
+                    if (!CreatStaff())
+                    {
+                        return;
+                    }
+                }
+                else if (currentMode == "Update")
+                {
+                    if (!UpdateStaff())
+                    {
+                        return;
+                    }
+                }
+
                 this.Close();
             }
             else if (e.Alt && e.KeyCode == Keys.C)
             {
-                CreatStaff();
+                CreatInputStaff();
             }
             else if (e.Alt && e.KeyCode == Keys.U)
             {
-                UpdateStaff();
+                if (hasSelectedStaff)
+                {
+                    UpdateInputStaff();
+                }
             }
             else if (e.Alt && e.KeyCode == Keys.D)
             {
-                DeleteStaff();
+                if (hasSelectedStaff)
+                {
+                    DeleteInputStaff();
+                }
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
             }
 
         }
