@@ -35,7 +35,7 @@ namespace MSSSStaffDic
             originalStaffID = staffID;
         }
 
-        private void CreatInputStaff()
+        private void CreateInputStaff()
         {
             if (currentMode != "")
             {
@@ -55,7 +55,7 @@ namespace MSSSStaffDic
             txtAdminID.SelectionStart = txtAdminID.Text.Length;
            
         }
-        private bool CreatStaff()
+        private bool CreateStaff()
         {
             // Validate Staff ID
             if (!int.TryParse(txtAdminID.Text, out int staffID) ||
@@ -131,7 +131,18 @@ namespace MSSSStaffDic
             txtAdminName.Clear();
 
         }
-       
+        private bool DeleteStaff()
+        {
+            int staffID = int.Parse(originalStaffID);
+
+            if (!GeneralForm.MasterFile.Remove(staffID))
+            {
+                MessageBox.Show("Failed to delete staff.");
+                return false;
+            }
+
+            return true;
+        }
 
 
         private void AdminForm_KeyDown(object sender, KeyEventArgs e)
@@ -140,7 +151,7 @@ namespace MSSSStaffDic
             {
                 if (currentMode == "Create")
                 {
-                    if (!CreatStaff())
+                    if (!CreateStaff())
                     {
                         return;
                     }
@@ -152,12 +163,19 @@ namespace MSSSStaffDic
                         return;
                     }
                 }
+                else if (currentMode == "Delete")
+                {
+                    if (!DeleteStaff())
+                    {
+                        return;
+                    }
+                }
 
                 this.Close();
             }
             else if (e.Alt && e.KeyCode == Keys.C)
             {
-                CreatInputStaff();
+                CreateInputStaff();
             }
             else if (e.Alt && e.KeyCode == Keys.U)
             {
